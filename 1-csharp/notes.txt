@@ -10,4 +10,4 @@ git commit
 
 nano hotkeys
     Ctrl+o: save the file (then hit enter to accept the existing filename)
-    Ctrl+x: exit (will prompt to save if you didn't save)
+    Ctrl+x: exit (will prompt to save (type y and then enter) if you didn't save)
