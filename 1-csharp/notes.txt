@@ -1,0 +1,13 @@
+git init
+    run this in a new empty folder
+    to create a new empty git repository
+git add [path1] [path2...]
+    mark some or all of current saved changes as
+    ready to be permanently recorded
+git commit
+    permanently records those changes into the history
+    with a commit message (describing the changes)
+
+nano hotkeys
+    Ctrl+o: save the file (then hit enter to accept the existing filename)
+    Ctrl+x: exit (will prompt to save if you didn't save)
