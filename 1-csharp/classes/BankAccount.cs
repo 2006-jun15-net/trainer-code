@@ -5,13 +5,35 @@ namespace classes
 {
     public class BankAccount
     {
+
         public string Number { get; }
-        public string Owner { get; set; }
+
+        private string owner;
+
+        public string Owner
+        {
+            get
+            {
+                return owner;
+            }
+            set
+            {
+                // inside a property setter, we have the keyword "value"
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    // throw new ArgumentOutOfRangeException(nameof(value), "invalid name");
+                    // throw new ArgumentNullException(nameof(value), "it's null");
+                    throw new ArgumentException(message: "invalid name", paramName: nameof(value));
+                }
+                owner = value;
+            }
+        }
 
         public decimal Balance
         {
             get
             {
+                Console.WriteLine("(inside the Balance getter running logic)");
                 decimal balance = 0;
                 foreach (var item in allTransactions)
                 {
@@ -35,13 +57,16 @@ namespace classes
 
         private List<Transaction> allTransactions = new List<Transaction>();
 
-        public void MakeDeposit(decimal amount, DateTime date, string note)
+        public void MakeDeposit(decimal moneyAmount, DateTime date, string note)
         {
-            if (amount <= 0)
+            if (moneyAmount <= 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(amount), "Amount of deposit must be positive");
+                Console.WriteLine(nameof(moneyAmount)); // prints "moneyAmount"
+                Console.WriteLine("amount"); // prints "amount"
+                Console.WriteLine(moneyAmount); // prints amount (e.g. 25.0)
+                throw new ArgumentOutOfRangeException(nameof(moneyAmount), "Amount of deposit must be positive");
             }
-            var deposit = new Transaction(amount, date, note);
+            var deposit = new Transaction(moneyAmount, date, note);
             allTransactions.Add(deposit);
         }
 
@@ -72,6 +97,34 @@ namespace classes
             }
 
             return report.ToString();
+        }
+    }
+
+    public class BankAccountJava
+    {
+        private string number;
+        private string owner;
+
+        public string GetNumber() {
+            return number;
+        }
+
+        public string GetOwner() {
+            return owner;
+        }
+
+        public void SetOwner(string owner) {
+            this.owner = owner;
+        }
+
+        public decimal GetBalance() {
+            decimal balance = 0;
+            // foreach (var item in allTransactions)
+            // {
+            //     balance += item.Amount;
+            // }
+
+            return balance;
         }
     }
 }
