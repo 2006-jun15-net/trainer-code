@@ -1,6 +1,15 @@
 using System;
 
-namespace ProductCatalog.App
+// architectural principle
+// separation of concerns
+//   code readability, flexible, code reuse
+//   maintainability, testability
+
+// for projects, this kind of separation is common:
+// application project just handles user input/output
+// various library projects handle the actual c# logic, separated from user i/o
+
+namespace ProductCatalog.Library
 {
     // C# supports many paradigms of programming
     // above all, it's an object-oriented language.
@@ -43,7 +52,7 @@ namespace ProductCatalog.App
             set { _name = value; }
         }
 
-        public void ApplyDiscount(int percentage)
+        internal void ApplyDiscount(int percentage)
         {
             double multiplier = 1 - percentage / 100.0;
             Price *= multiplier;

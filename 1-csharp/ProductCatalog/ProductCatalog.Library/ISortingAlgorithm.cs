@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace ProductCatalog.App
+namespace ProductCatalog.Library
 {
     // the point of creating an interface like this is...
     // let's say i have some need in my project to sort data,

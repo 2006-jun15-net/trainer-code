@@ -1,6 +1,6 @@
 using System;
 
-namespace ProductCatalog
+namespace ProductCatalog.Library
 {
     public class Circle //: IShape
     {

@@ -1,4 +1,4 @@
-namespace ProductCatalog.App
+namespace ProductCatalog.Library
 {
     // just as a class specifies requirements for the objects that are instances
     //    of that class,

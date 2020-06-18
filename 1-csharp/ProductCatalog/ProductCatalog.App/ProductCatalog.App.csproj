@@ -5,4 +5,10 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <!-- added project reference with "dotnet add reference ../ProductCatalog.Library/"" -->
+
+  <ItemGroup>
+    <ProjectReference Include="..\ProductCatalog.Library\ProductCatalog.Library.csproj" />
+  </ItemGroup>
+
 </Project>

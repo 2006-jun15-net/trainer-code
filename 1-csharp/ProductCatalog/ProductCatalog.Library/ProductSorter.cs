@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace ProductCatalog.App
+namespace ProductCatalog.Library
 {
     public class ProductSorter : ISortingAlgorithm<List<Product>>
     {
