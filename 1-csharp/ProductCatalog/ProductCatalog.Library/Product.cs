@@ -46,13 +46,13 @@ namespace ProductCatalog.Library
         private string _name;
 
         // "full property" - no hidden field, full control over validation etc.
-        public string Name
+        public virtual string Name
         {
             get { return _name; }
             set { _name = value; }
         }
 
-        internal void ApplyDiscount(int percentage)
+        public void ApplyDiscount(int percentage)
         {
             double multiplier = 1 - percentage / 100.0;
             Price *= multiplier;

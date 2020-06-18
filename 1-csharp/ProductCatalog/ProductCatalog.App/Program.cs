@@ -9,6 +9,14 @@ namespace ProductCatalog.App
         static void Main(string[] args)
         {
             var c = new Circle(4);
+            Console.WriteLine(c); // (WriteLine uses ToString to convert objects to strings (as does the + operator))
+            Console.WriteLine(c.GetArea());
+
+            LocatedCircle circle2 = new LocatedCircle(3, 0, 0);
+            Console.WriteLine(circle2.GetArea()); // prints: 0
+
+            //                                  (implicit) upcast
+            DisplayCircles(new List<Circle> { c, circle2 });
 
             var product = new Product();
             product.Color = "red";
@@ -38,8 +46,11 @@ namespace ProductCatalog.App
                 // this is also called "upcasting"
 
                 // downcasting example:
-                ProductSorter sorter3 = (ProductSorter)sorterToUse; // this might fail: what if it's really a BuiltinProductSorter value?
+                //ProductSorter sorter3 = (ProductSorter)sorterToUse; // this might fail: what if it's really a BuiltinProductSorter value?
                 // so it must be explicit. this line will throw an error at runtime because it really is not a ProductSorter.
+
+                // in VS:   comment with Ctrl+K, Ctrl+C
+                // in VS: uncomment with Ctrl+K, Ctrl+U
             }
 
             // ask the user if it's reverse or not
@@ -49,6 +60,16 @@ namespace ProductCatalog.App
             // }
 
             DisplayProducts(new List<Product> { product }, sorterToUse);
+        }
+
+        static void DisplayCircles(List<Circle> circles)
+        {
+            foreach (Circle circle in circles)
+            {
+                Console.WriteLine($"{circle}, with area {circle.GetArea()}");
+                // when you override a method, it really totally replaces the parent implementation
+                // in the object itself, no matter what type variable is looking at that object.
+            }
         }
 
         static void DisplayProducts(List<Product> products, ISortingAlgorithm<List<Product>> sorter)
