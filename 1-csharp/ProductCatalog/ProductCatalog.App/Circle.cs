@@ -2,7 +2,7 @@ using System;
 
 namespace ProductCatalog
 {
-    public class Circle // : IShape
+    public class Circle //: IShape
     {
         // fields
         private double _radius = 0;

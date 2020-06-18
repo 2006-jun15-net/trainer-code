@@ -10,7 +10,7 @@ namespace ProductCatalog.App
     // any restrictions or rules about its own data or behavior.
     // "encapsulation"
 
-    class Product
+    public class Product
     {
         // an "auto-implemented property" or just "auto-property"
         // - it's based on a hidden backing field of type double,
