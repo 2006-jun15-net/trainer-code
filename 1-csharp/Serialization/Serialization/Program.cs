@@ -44,7 +44,7 @@ namespace Serialization
         // (continue again from step 1 on the parts of your code that are now broken)
         public async static Task WriteStringToFileAsync(string filePath, string json)
         {
-            //await File.WriteAllTextAsync(filePath, json);
+            await File.WriteAllTextAsync(filePath, json);
             // for more control over the file I/O, we would usually open a FileStream object.
 
             // the CLR manages the memory for all the CLR objects with garbage collection.
@@ -55,18 +55,18 @@ namespace Serialization
             // the IDisposable interface is implemented by any class which you need to do this for.
 
             //FileStream fileStream = null;
-            try
-            {
-                // if you are fine with the resource not being disposed until the variable goes out of scope...
-                // you can use this form of the using statement.
-                using var fileStream = new FileStream(filePath, FileMode.Create);
+            //try
+            //{
+            //    // if you are fine with the resource not being disposed until the variable goes out of scope...
+            //    // you can use this form of the using statement.
+            //    using var fileStream = new FileStream(filePath, FileMode.Create);
 
-                //fileStream. // pretend i finished the code
-            }
-            catch (IOException ex)
-            {
-                Console.WriteLine($"Error writing file: {ex.Message}");
-            }
+            //    //fileStream. // pretend i finished the code
+            //}
+            //catch (IOException ex)
+            //{
+            //    Console.WriteLine($"Error writing file: {ex.Message}");
+            //}
             //finally
             //{
             //    // what if an exception is thrown at any point beforehand?
