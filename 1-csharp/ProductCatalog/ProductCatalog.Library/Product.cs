@@ -39,7 +39,7 @@ namespace ProductCatalog.Library
                 _price = value;
             }
         }
-
+        
         public string Color { get; set; }
 
         // the backing field for Name property
