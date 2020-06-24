@@ -29,7 +29,7 @@ reduce the need to completely restructure if the data model changes.
 6 normal forms, 1-3 are the practical ones
 first normal form
     all elements are atomic values, not lists/groups/sets. break them up to more rows
-    adding new columns just to split up groups (e.g. Course1, Course2), if not motivated, is informally violating 1NF
+    no repeating groups: adding new columns just to split up groups (e.g. Course1, Course2), if not motivated, is informally violating 1NF
     each row must be unique (so there must be some candidate keys - we choose one, and call it the primary key)
 second normal form -
     all columns which are not part of any candidate key, cannot have partial dependency on any of the candidate keys
@@ -39,6 +39,8 @@ second normal form -
     CityID    City   State    Region    SalesCount
 third normal form -
     no non-CK column can depend on any other non-CK column.
+    no transitive dependencies
+
 "the keys, the whole keys, and nothing but the keys"
     "the key" - every non-CK column must depend on every CK --- that's the definition of a CK, so this is saying, "a CK must exist"
     "the whole key" - every non-CK column must depend on the whole of every CK, not just part
