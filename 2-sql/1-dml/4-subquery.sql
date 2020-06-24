@@ -39,3 +39,26 @@ WHERE InvoiceLine.InvoiceLineId IS NULL;
 SELECT TrackId FROM Track
 EXCEPT
 SELECT TrackId FROM InvoiceLine;
+
+
+-- exercise set 3 #2
+-- which artists did not record any tracks of the Latin genre?
+SELECT *
+FROM Artist
+WHERE ArtistId NOT IN ( -- all the artists who wrote such an album
+	SELECT ArtistId FROM Album WHERE AlbumId IN ( -- all the albums with a latin song
+		SELECT AlbumId
+		FROM Track           -- all the genres named latin
+		WHERE GenreId IN (SELECT GenreId FROM Genre WHERE Name = 'Latin')
+	)
+);
+
+-- join + set-op version
+SELECT * FROM Artist
+EXCEPT
+SELECT ar.*
+FROM Artist AS ar
+	INNER JOIN Album AS al ON ar.ArtistId = al.ArtistId
+	INNER JOIN Track AS t ON al.AlbumId = t.AlbumId
+	INNER JOIN Genre AS g ON t.GenreId = g.GenreId
+WHERE g.Name = 'Latin';
