@@ -23,10 +23,24 @@ SELECT * FROM Genre;
 -- all rock songs, shown in the format "artist - song"
 
 SELECT COALESCE(ar.Name, 'N/A') + ' - ' + t.Name
-FROM Track AS t
-	LEFT JOIN Genre AS g ON t.GenreId = g.GenreId
+FROM Genre AS g
+	RIGHT JOIN Track AS t ON t.GenreId = g.GenreId
 	LEFT JOIN Album AS al ON t.AlbumId = al.AlbumId
 	LEFT JOIN Artist AS ar ON al.ArtistId = ar.ArtistId
 WHERE g.Name = 'rock';
 
 -- COALESCE function will provide an alternate value in case of NULL
+
+-- join exercises #2
+-- show all invoices together with the name of the sales agent of each one
+SELECT i.*, e.FirstName, e.LastName
+FROM Invoice AS i
+	LEFT JOIN Customer AS c ON i.CustomerId = c.CustomerId
+	LEFT JOIN Employee AS e ON c.SupportRepId = e.EmployeeId;
+
+-- join exercises #3
+-- 3. show all playlists ordered by the total number of tracks they have
+SELECT p.PlaylistId, p.Name, COUNT(*) AS "Number of Tracks"
+FROM Playlist AS p
+	LEFT JOIN PlaylistTrack AS pt ON p.PlaylistId = pt.PlaylistId
+GROUP BY p.PlaylistId, p.Name;
