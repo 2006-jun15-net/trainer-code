@@ -36,3 +36,18 @@ WHERE GenreId >= 100;
 
 -- this command deletes all rows all at once
 --TRUNCATE TABLE Genre;
+
+-- exercise
+-- delete robert walter
+DELETE FROM InvoiceLine WHERE InvoiceId IN (
+    SELECT InvoiceId FROM Invoice WHERE CustomerId = (
+        SELECT CustomerId FROM Customer
+        WHERE FirstName = 'Robert' AND LastName = 'Walter'
+    )
+);
+DELETE FROM Invoice WHERE CustomerId = (
+    SELECT CustomerId FROM Customer
+    WHERE FirstName = 'Robert' AND LastName = 'Walter'
+);
+DELETE FROM Customer
+WHERE FirstName = 'Robert' AND LastName = 'Walter';
