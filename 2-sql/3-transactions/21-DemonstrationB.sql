@@ -65,6 +65,7 @@ END CATCH;
 -- you can make savepoints during a transaction - and then rollback to a particular savepoint
 -- rather than the whole transaction at once.
 
+
 -- in T-SQL, every statement by itself is already a transaction unto itself
 --    with automatic rollback.
 --UPDATE table
