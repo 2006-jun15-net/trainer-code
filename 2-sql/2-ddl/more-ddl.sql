@@ -51,11 +51,13 @@ UPDATE Poke.WeirdView SET Name = 'Charmander';
 
 ------------------
 -- another view example with Chinook db
+GO
 CREATE VIEW TrackWithGenre AS (
 	SELECT t.*, g.Name AS GenreName
 	FROM Track AS t LEFT JOIN Genre AS g
 		ON t.GenreId = g.GenreId
 );
+GO
 
 SELECT * FROM TrackWithGenre;
 ----------------
@@ -66,51 +68,50 @@ SELECT * FROM TrackWithGenre;
 -- they only exist for the duration of that "batch" of commands
 
 DECLARE @maxid INT;
-SELECT @maxid = MAX(TypeId) FROM Poke.Type;
-SET @maxid = (SELECT MAX(TypeId) FROM Poke.Type); -- another way to set variable
-INSERT INTO Poke.Type (TypeId, Name) VALUES (@maxid + 1, 'Earth');
+SELECT @maxid = MAX(Id) FROM School.Course;
+--SET @maxid = (SELECT MAX(Id) FROM School.Course); -- another way to set variable
+INSERT INTO School.Course (Id, CourseNumber) VALUES (@maxid + 1, 'CS104');
 
 --table-valued variables
-DECLARE @@mytable AS TABLE (
+DECLARE @mytable AS TABLE (
     Id INT,
     Name NVARCHAR(20)
 );
-INSERT INTO @@mytable
-    SELECT TypeId, Name FROM Poke.Type;
-
+INSERT INTO @mytable
+    SELECT Id, CourseNumber FROM School.Course;
 
 -- user-defined functions in SQL Server
 
 -- functions cannot modify the database in any way
 -- pretty much just SELECT
 GO
-CREATE FUNCTION Poke.TotalNumberOfPokemon()
+CREATE FUNCTION School.TotalNumberOfStudents()
 RETURNS INT
 AS
 BEGIN
     DECLARE @result INT;
 
-    SELECT @result = COUNT(*) FROM Poke.Pokemon;
+    SELECT @result = COUNT(*) FROM School.Student;
 
     RETURN @result;
 END
 GO
 
-SELECT Poke.TotalNumberOfPokemon();
+SELECT School.TotalNumberOfStudents();
 
 -- that was a scalar function (it returns a single value)
 
 -- table-valued functions:
 GO
-CREATE FUNCTION Poke.PokemonWithNameOfLength(@length INT)
+CREATE FUNCTION School.StudentsWithNameOfLength(@length INT)
 RETURNS TABLE
 AS
     RETURN (
-        SELECT * FROM Poke.Pokemon WHERE LEN(Name) = @length
+        SELECT * FROM School.Student WHERE LEN(Name) = @length
     );
 GO
 
-SELECT * FROM Poke.PokemonWithNameOfLength(8);
+SELECT * FROM School.StudentsWithNameOfLength(4);
 
 -- functions cannot make any changes to the database at all
 -- they have "read-only" access.
@@ -127,7 +128,8 @@ BEGIN
     );
 END
 GO
-SELECT dbo.CustomerInitials(20);
+-- all customers with the same initials as customer 20
+SELECT * FROM Customer WHERE dbo.CustomerInitials(CustomerId) = dbo.CustomerInitials(20);
 -- FUNCTIONs support WITH SCHEMABINDING
 
 -- (stored) procedures are like functions, except you can
@@ -137,16 +139,16 @@ SELECT dbo.CustomerInitials(20);
 -- procedure to update all the datemodified values to the current time
 -- return the number of rows modified
 GO
-CREATE OR ALTER PROCEDURE Poke.UpdateAllDateModified(@param INT, @rowschanged INT OUTPUT)
+CREATE OR ALTER PROCEDURE School.UpdateAllDateModified(@param INT, @rowschanged INT OUTPUT)
 AS
 BEGIN
     BEGIN TRY
-		IF (NOT EXISTS (SELECT * FROM Poke.Pokemon))
+		IF (NOT EXISTS (SELECT * FROM School.Course))
 		BEGIN
 			RAISERROR ('No data found in table', 15, 1);
 		END
-		SET @rowschanged = (SELECT COUNT(*) FROM Poke.Pokemon);
-		UPDATE Poke.Pokemon SET DateModified = GETDATE();
+		SET @rowschanged = (SELECT COUNT(*) FROM School.Course);
+		UPDATE School.Course SET DateModified = SYSUTCDATETIME();
     END TRY
     BEGIN CATCH
         PRINT 'Error'
@@ -155,7 +157,7 @@ END
 GO
 
 DECLARE @result INT;
-EXECUTE Poke.UpdateAllDateModified 123, @result OUTPUT;
+EXECUTE School.UpdateAllDateModified 123, @result OUTPUT;
 SELECT @result;
 
 -- triggers
@@ -165,16 +167,19 @@ SELECT @result;
 -- a trigger that automatically maintains the DateModified column
 -- for updates
 GO
-CREATE TRIGGER Poke.PokemonDateModified ON Poke.Pokemon
+CREATE TRIGGER School.CourseDateModified ON School.Course
 AFTER UPDATE
 AS
 BEGIN
     -- in a trigger, you have access to two special table-valued variables
     -- called Inserted and Deleted.
-    UPDATE Poke.Pokemon SET DateModified = GETDATE()
-    WHERE PokemonId IN (SELECT PokemonId FROM Inserted);
+    UPDATE School.Course
+	SET DateModified = SYSUTCDATETIME()
+    WHERE Id IN (SELECT Id FROM Inserted);
     -- recursion in triggers is off by default
 END
+
+UPDATE School.Course SET CourseNumber = 'CS105' WHERE CourseNumber = 'CS104';
 
 -- trigger that prevents deleting rows (on a Chinook table)
 -- or maybe, replaces deleting rows with modifying the Active column
