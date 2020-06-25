@@ -1,4 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using ChinookApp.DataAccess.Model;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace ChinookApp
 {
@@ -26,6 +31,17 @@ namespace ChinookApp
          */
 
 
+        // for this code to compile, you need to add a gitignored file SecretConfiguration.cs like:
+
+        /*
+        namespace ChinookApp
+        {
+            internal class SecretConfiguration
+            {
+                internal const string ConnectionString = "your connection string here";
+            }
+        }
+         */
 
         // Entity Framework configures itself at runtime
         // from three sources -
@@ -35,9 +51,66 @@ namespace ChinookApp
         //      - e.g.: if a type named "X" has a property named either "Id" or "XId",
         //            it will be assumed to be the primary key
 
+        public static readonly ILoggerFactory MyLoggerFactory
+            = LoggerFactory.Create(builder => { builder.AddConsole(); });
+
+        public static readonly DbContextOptions<ChinookContext> Options = new DbContextOptionsBuilder<ChinookContext>()
+            .UseLoggerFactory(MyLoggerFactory)
+            .UseSqlServer(SecretConfiguration.ConnectionString)
+            .Options;
+
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            DisplayData();
+
+            Console.WriteLine("\nAdding some data...");
+            AddSomeDataFromUserInput();
+
+            DisplayData();
+
+            Console.WriteLine("\nUpdating some data...");
+            UpdateSomeData();
+
+            DisplayData();
+
+            Console.WriteLine("\nDeleting some data...");
+            DeleteSomeData();
+
+            DisplayData();
+        }
+
+        public static void DeleteSomeData()
+        {
+            throw new NotImplementedException();
+        }
+
+        public static void UpdateSomeData()
+        {
+            throw new NotImplementedException();
+        }
+
+        public static void AddSomeDataFromUserInput()
+        {
+            throw new NotImplementedException();
+        }
+
+        public static void DisplayData()
+        {
+            using var context = new ChinookContext(Options);
+
+            //List<Employee> salespeople = context.Employee
+            //    .ToList() // it generates the SQL and fetches the objects
+            //    .Where(e => e.Title.Contains("sales")) // this is now running in .NET, not in SQL
+            //    .ToList();
+
+            List<Employee> salespeople = context.Employee
+                .Where(e => e.Title.Contains("sales")) // this will be translated to SQL
+                .ToList(); // it generates the SQL and fetches the objects
+
+            foreach (Employee person in salespeople)
+            {
+                Console.WriteLine($"{person.Title} {person.FirstName} {person.LastName}");
+            }
         }
     }
 }

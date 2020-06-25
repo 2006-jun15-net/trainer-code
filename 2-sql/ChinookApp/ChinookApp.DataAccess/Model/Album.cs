@@ -12,9 +12,9 @@ namespace ChinookApp.DataAccess.Model
 
         public int AlbumId { get; set; }
         public string Title { get; set; }
-        public int ArtistId { get; set; }
+        public int ArtistId { get; set; } // foreign key column
 
-        public virtual Artist Artist { get; set; }
-        public virtual ICollection<Track> Track { get; set; }
+        public virtual Artist Artist { get; set; } // navigation property
+        public virtual ICollection<Track> Track { get; set; } // collection navigation property
     }
 }

@@ -13,6 +13,10 @@ namespace ChinookApp.DataAccess.Model
 
         public int TrackId { get; set; }
         public string Name { get; set; }
+
+        // foreign key underlying both the Track.Album navigation property
+        // and the Album.Track navigation property as well.
+
         public int? AlbumId { get; set; }
         public int MediaTypeId { get; set; }
         public int? GenreId { get; set; }
