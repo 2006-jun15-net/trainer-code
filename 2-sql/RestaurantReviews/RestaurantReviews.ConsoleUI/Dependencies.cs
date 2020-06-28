@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Xml.Serialization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
@@ -14,8 +15,15 @@ namespace RestaurantReviews.ConsoleUI
     // either you have the DbContext.OnConfiguring method, or, you implement an IDesignTimeDbContextFactory.
     // then, the command like "dotnet ef migrations add InitialCreate --startup-project ../RestaurantReviews.ConsoleUI/"
     // will work. (in an ASP.NET app, configuring the context in Startup is a third option.)
-    public class Dependencies : IDesignTimeDbContextFactory<RestaurantReviewsDbContext>
+
+    // this class follows the disposable pattern (the standard way to implement the IDisposable interface),
+    // so that it can in turn dispose of the contexts it has created.
+    public class Dependencies : IDesignTimeDbContextFactory<RestaurantReviewsDbContext>, IDisposable
     {
+        private bool _disposedValue;
+
+        private readonly List<IDisposable> _disposables = new List<IDisposable>();
+
         public RestaurantReviewsDbContext CreateDbContext(string[] args = null)
         {
             var optionsBuilder = new DbContextOptionsBuilder<RestaurantReviewsDbContext>();
@@ -27,12 +35,35 @@ namespace RestaurantReviews.ConsoleUI
         public IRestaurantRepository CreateRestaurantRepository()
         {
             var dbContext = CreateDbContext();
+            _disposables.Add(dbContext);
             return new RestaurantRepository(dbContext);
         }
 
         public XmlSerializer CreateXmlSerializer()
         {
             return new XmlSerializer(typeof(List<Library.Models.Restaurant>));
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!_disposedValue)
+            {
+                if (disposing)
+                {
+                    foreach (IDisposable disposable in _disposables)
+                    {
+                        disposable.Dispose();
+                    }
+                }
+
+                _disposedValue = true;
+            }
+        }
+
+        public void Dispose()
+        {
+            Dispose(disposing: true);
+            GC.SuppressFinalize(this);
         }
     }
 }

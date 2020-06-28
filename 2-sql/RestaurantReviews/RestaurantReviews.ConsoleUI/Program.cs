@@ -16,7 +16,7 @@ namespace RestaurantReviews.ConsoleUI
 
         public static void Main()
         {
-            var dependencies = new Dependencies();
+            using var dependencies = new Dependencies();
             XmlSerializer serializer = dependencies.CreateXmlSerializer();
 
             // the dbcontext does have to be instantiated in this project, but otherwise we can
