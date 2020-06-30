@@ -13,7 +13,6 @@
         author styles (provided by website author) override user-agent styles (browser defaults)
       2. specificity
         how specific is the rule, heuristic for how many elements it could match
-          1000 if it's inline style (style="")
           100 for each id selector
           10 for each class selector
           1 for each element selector
