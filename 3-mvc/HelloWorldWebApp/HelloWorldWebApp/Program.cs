@@ -13,7 +13,11 @@ namespace HelloWorldWebApp
     {
         public static void Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
+            // interface IHost which represents the part of the app
+            // that runs indefinitely waiting for HTTP requests, and constructing responses.
+
+            IHost host = CreateHostBuilder(args).Build();
+            host.Run();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
