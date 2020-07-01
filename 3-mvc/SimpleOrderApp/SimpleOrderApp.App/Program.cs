@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using SimpleOrderApp.Data;
 using SimpleOrderApp.Domain;
 
 namespace SimpleOrderApp.App
@@ -10,10 +11,14 @@ namespace SimpleOrderApp.App
     {
         public static void Main()
         {
-
-            ILocationRepository locationRepo = new LocationRepository();
-            IOrderRepository orderRepo = new OrderRepository();
-            var orderService = new OrderService(orderRepo);
+            // create dependencies
+            var factory = new SimpleOrderContextFactory();
+            using var context = factory.CreateDbContext();
+            ILocationRepository locationRepo = new LocationRepository(context);
+            IOrderRepository orderRepo = new OrderRepository(context);
+            var orderService = new OrderService(orderRepo, locationRepo);
+            
+            // manage UI
 
             Console.WriteLine("Welcome to my store");
 
@@ -24,6 +29,7 @@ namespace SimpleOrderApp.App
 
             // TODO: prompt user to confirm
 
+            // TODO: exception handling
             orderService.PlaceOrder(shoppingCart);
 
             Console.WriteLine("Thank you for shopping");

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace SimpleOrderApp.Data
+namespace SimpleOrderApp.Data.Model
 {
     public class OrderEntity
     {

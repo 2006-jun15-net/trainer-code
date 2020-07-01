@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
 
-namespace SimpleOrderApp.Data
+namespace SimpleOrderApp.Data.Model
 {
     public class SimpleOrderContext : DbContext
     {
@@ -35,6 +35,16 @@ namespace SimpleOrderApp.Data
             {
                 entity.ToTable("Orders");
             });
+
+            // with code-first, you can specify initial data (seed data) for the tables as well, right here
+            // https://docs.microsoft.com/en-us/ef/core/modeling/data-seeding
+
+            modelBuilder.Entity<LocationEntity>()
+                .HasData(new LocationEntity[]
+                {
+                    new LocationEntity { Id = 1, Name = "cookie shop 1", Stock = 100 },
+                    new LocationEntity { Id = 2, Name = "cookie shop 2", Stock = 2 }
+                });
         }
     }
 }

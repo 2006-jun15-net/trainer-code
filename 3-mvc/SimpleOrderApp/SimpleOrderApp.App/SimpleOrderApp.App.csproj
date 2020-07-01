@@ -6,6 +6,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SimpleOrderApp.Data\SimpleOrderApp.Data.csproj" />
     <ProjectReference Include="..\SimpleOrderApp.Domain\SimpleOrderApp.Domain.csproj" />
   </ItemGroup>
 
