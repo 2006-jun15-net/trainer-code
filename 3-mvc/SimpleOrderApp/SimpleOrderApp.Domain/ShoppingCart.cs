@@ -21,7 +21,12 @@ namespace SimpleOrderApp.Domain
             }
         }
 
-        public Location Location { get; set; }
+        public Location Location { get; }
+
+        public ShoppingCart(Location location)
+        {
+            Location = location ?? throw new ArgumentNullException(nameof(location));
+        }
 
         public void EmptyCart()
         {

@@ -4,10 +4,13 @@ namespace SimpleOrderApp.Domain
 {
     public class Location
     {
+        public string Name { get; set; }
+
         public int Stock { get; private set; }
 
-        public Location(int initialStock)
+        public Location(string name, int initialStock)
         {
+            Name = name;
             Stock = initialStock;
         }
 
@@ -22,6 +25,11 @@ namespace SimpleOrderApp.Domain
                 throw new InvalidOperationException("not enough stock");
             }
             Stock -= amount;
+        }
+
+        public override string ToString()
+        {
+            return $"{Name} ({Stock} in stock)";
         }
     }
 }
