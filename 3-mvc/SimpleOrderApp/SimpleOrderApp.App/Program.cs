@@ -12,7 +12,7 @@ namespace SimpleOrderApp.App
         {
 
             ILocationRepository locationRepo = new LocationRepository();
-            IOrderRepository orderRepo = new LocationRepository();
+            IOrderRepository orderRepo = new OrderRepository();
             var orderService = new OrderService(orderRepo);
 
             Console.WriteLine("Welcome to my store");
