@@ -11,12 +11,21 @@ using Microsoft.Extensions.Hosting;
 
 namespace HelloWorldWebApp
 {
+    // a controller will take responsibility for handling some subset of requests to the app
+    // (usually based upon the path in the URL.)
+    // e.g. if I want o user to be able to access pages like /account/myprofile, /account/browse
+    // /catalog/purchase, maybe i'd have an AccountController and a CatalogController.
+
+
+
     public class Startup
     {
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            // teach asp.net about controllers
+            services.AddControllers();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -31,7 +40,19 @@ namespace HelloWorldWebApp
             //    app.UseDeveloperExceptionPage();
             //}
 
-            //app.UseRouting();
+            app.UseRouting();
+
+            app.UseEndpoints(endpoints =>
+            {
+                // C# supports anonymous types like new { prop = "a", prop2 = 1 }
+                // we can set up multiple routes - each one will give a rule for a certain pattern of URL
+                // that can decide what the controller and action are.
+                endpoints.MapControllerRoute("hello-route", "hello", new { controller = "Hello", action = "Hello1" });
+                // for each request, it starts with the first route and if that doesn't match, it tries each succeeding one
+                // in order
+                // if you pull the controller or action directly from the pattern, you don't need any default for it
+                endpoints.MapControllerRoute("default", "{controller}/{action}");
+            });
 
             //app.UseEndpoints(endpoints =>
             //{
