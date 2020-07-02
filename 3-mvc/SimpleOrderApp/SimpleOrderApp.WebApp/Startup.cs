@@ -17,6 +17,8 @@ namespace SimpleOrderApp.WebApp
 {
     public class Startup
     {
+        // this configuration object gets constructed from multiple sources of key-value pairs
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -29,19 +31,26 @@ namespace SimpleOrderApp.WebApp
         {
             // teach ASP.NET Core about the dbcontext (so one can be created for each thing that needs it)
             services.AddDbContext<SimpleOrderContext>(options =>
-                options.UseSqlite("Data Source=C:\\revature\\simpleorder.db"));
+                options.UseSqlite(Configuration.GetConnectionString("Sqlite")));
+
+            // ^ if you get a NullReferenceException there, it's because you need to put this in
+            // user secrets:
+            //"ConnectionStrings": {
+            //    "Sqlite": "Data Source=C:/revature/simpleorder.db"
+            //}
 
             // "if anyone asks for an ILocationRepository, construct a LocationRepository"
-            services.AddScoped<ILocationRepository, LocationRepository>();
+            //services.AddScoped<ILocationRepository, LocationRepository>();
 
             // flexible... e.g.:
-            //if (condition)
-            //{
-            //    services.AddScoped<ILocationRepository, LocationRepository1>();
-            //} else
-            //{
-            //    services.AddScoped<ILocationRepository, LocationRepository2>();
-            //}
+            if (Configuration["WhichRepository"] == "1")
+            {
+                services.AddScoped<ILocationRepository, LocationRepository>();
+            }
+            else
+            {
+                services.AddScoped<ILocationRepository, LocationRepository>();
+            }
 
             //services.AddScoped<LocationRepository>();
             // (equivalent to:)
