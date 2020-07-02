@@ -1,8 +1,28 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model IEnumerable<SimpleOrderApp.Domain.Location>
+
+@{
+  ViewData["Title"] = "Home Page";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+  <h1 class="display-4">Welcome</h1>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Stock</th>
+      </tr>
+    </thead>
+    <tbody>
+      @foreach (var location in Model)
+      {
+      <tr>
+        <td>@location.Name</td>
+        <td>@location.Stock</td>
+      </tr>
+      }
+    </tbody>
+  </table>
+
 </div>

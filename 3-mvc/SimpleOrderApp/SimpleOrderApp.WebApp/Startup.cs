@@ -5,9 +5,13 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using SimpleOrderApp.Data;
+using SimpleOrderApp.Data.Model;
+using SimpleOrderApp.Domain;
 
 namespace SimpleOrderApp.WebApp
 {
@@ -23,6 +27,32 @@ namespace SimpleOrderApp.WebApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // teach ASP.NET Core about the dbcontext (so one can be created for each thing that needs it)
+            services.AddDbContext<SimpleOrderContext>(options =>
+                options.UseSqlite("Data Source=C:\\revature\\simpleorder.db"));
+
+            // "if anyone asks for an ILocationRepository, construct a LocationRepository"
+            services.AddScoped<ILocationRepository, LocationRepository>();
+
+            // flexible... e.g.:
+            //if (condition)
+            //{
+            //    services.AddScoped<ILocationRepository, LocationRepository1>();
+            //} else
+            //{
+            //    services.AddScoped<ILocationRepository, LocationRepository2>();
+            //}
+
+            //services.AddScoped<LocationRepository>();
+            // (equivalent to:)
+            //services.AddScoped<LocationRepository>(sp => new LocationRepository(sp.GetService<SimpleOrderContext>()));
+
+            // three service lifetimes:
+            // - singleton: one instance for the whole app lifetime
+            // - scoped: one instance per HTTP request cycle, shared by anything within that one request's scope
+            //      (default for the dbcontext)
+            // - transient: a new instance for every time a different object needs one
+
             services.AddControllersWithViews();
         }
 

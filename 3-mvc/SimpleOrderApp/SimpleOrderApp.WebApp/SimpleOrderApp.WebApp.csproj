@@ -4,4 +4,9 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\SimpleOrderApp.Data\SimpleOrderApp.Data.csproj" />
+    <ProjectReference Include="..\SimpleOrderApp.Domain\SimpleOrderApp.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
