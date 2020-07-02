@@ -24,8 +24,8 @@ namespace HelloWorldWebApp
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            // teach asp.net about controllers
-            services.AddControllers();
+            // teach asp.net about controllers and views
+            services.AddControllersWithViews();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -35,10 +35,10 @@ namespace HelloWorldWebApp
 
             // each of these "app.UseSomething" lines plugs in some middleware
             // in order, which will have a chance ot look at and maybe respond to every incoming HTTP request
-            //if (env.IsDevelopment())
-            //{
-            //    app.UseDeveloperExceptionPage();
-            //}
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
 
             app.UseRouting();
 

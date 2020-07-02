@@ -1,0 +1,16 @@
+﻿@*
+  views use "Razor syntax" which is HTML + some extra stuff
+  this is a comment
+*@
+
+@{ 
+    // this is a Razor block (a block of C# statements which runs when the view is being rendered to HTML)
+    Layout = "_Layout";
+}
+
+the model is: @Model
+
+@*
+  that is a Razor expression - the @ switches to "C# mode"
+  so it'll look for a property named Model that's in scope, convert it to a string, and put it into the HTML.
+*@

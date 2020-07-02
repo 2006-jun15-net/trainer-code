@@ -1,0 +1,21 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width" />
+  <title>@ViewBag.Title</title>
+</head>
+<body>
+  @* when a view is rendered, it can either stand alone (in which case it should have all the needed tags, <html> etc)
+    or, it can choose to render within a layout. *@
+
+  <div>
+    @* this is where the view itself goes *@
+    @RenderBody()
+  </div>
+
+  <div>
+    copyright revature
+  </div>
+</body>
+</html>
