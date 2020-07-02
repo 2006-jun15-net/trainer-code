@@ -38,6 +38,17 @@ namespace SimpleOrderApp.Data
             return entities.Select(e => new Location(e.Name, e.Stock));
         }
 
+        public void Create(Location location)
+        {
+            // map to EF model
+            var entity = new LocationEntity { Name = location.Name, Stock = location.Stock };
+
+            _context.Locations.Add(entity);
+
+            // write changes to DB
+            _context.SaveChanges();
+        }
+
         // only support changing stock
         public void Update(Location location)
         {

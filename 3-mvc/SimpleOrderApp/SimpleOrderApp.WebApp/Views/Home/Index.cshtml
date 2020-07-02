@@ -1,4 +1,4 @@
-﻿@model IEnumerable<SimpleOrderApp.Domain.Location>
+﻿@model IEnumerable<LocationViewModel>
 
 @{
   ViewData["Title"] = "Home Page";
@@ -7,19 +7,22 @@
 <div class="text-center">
   <h1 class="display-4">Welcome</h1>
 
+
+  @* we use these HTML helpers so that the display formatting can be controlled
+    from the DataAnnotations on the model of this view *@
   <table class="table">
     <thead>
       <tr>
-        <th>Name</th>
-        <th>Stock</th>
+        <th>@Html.DisplayNameFor(m => m.First().Name)</th>
+        <th>@Html.DisplayNameFor(m => m.First().Stock)</th>
       </tr>
     </thead>
     <tbody>
       @foreach (var location in Model)
       {
       <tr>
-        <td>@location.Name</td>
-        <td>@location.Stock</td>
+        <td>@Html.DisplayFor(m => location.Name)</td>
+        <td>@Html.DisplayFor(m => location.Stock)</td>
       </tr>
       }
     </tbody>

@@ -5,10 +5,23 @@ namespace SimpleOrderApp.Domain
 {
     public class Location
     {
+        private int _stock;
+
         // relies on name for uniqueness only
         public string Name { get; set; }
 
-        public int Stock { get; private set; }
+        public int Stock
+        {
+            get => _stock;
+            private set
+            {
+                if (value < 0)
+                {
+                    throw new ArgumentOutOfRangeException(nameof(value), "can't be negative");
+                }
+                _stock = value;
+            }
+        }
 
         // might be null if not loaded
         public List<Order> OrderHistory { get; set; }

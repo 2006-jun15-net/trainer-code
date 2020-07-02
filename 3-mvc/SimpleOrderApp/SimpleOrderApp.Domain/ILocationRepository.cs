@@ -6,6 +6,8 @@ namespace SimpleOrderApp.Domain
     {
         IEnumerable<Location> GetAll();
 
+        void Create(Location location);
+
         void Update(Location location);
     }
 }
