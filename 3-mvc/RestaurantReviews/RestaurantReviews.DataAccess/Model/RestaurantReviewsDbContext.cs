@@ -22,6 +22,10 @@ namespace RestaurantReviews.DataAccess.Model
         {
             modelBuilder.Entity<Restaurant>(entity =>
             {
+                entity.ToTable("Restaurant", "RR");
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
                 entity.Property(e => e.Name)
                     .IsRequired()
                     .HasMaxLength(128);
@@ -29,7 +33,11 @@ namespace RestaurantReviews.DataAccess.Model
 
             modelBuilder.Entity<Review>(entity =>
             {
-                entity.HasIndex(e => e.RestaurantId);
+                entity.ToTable("Review", "RR");
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.RestaurantId).HasColumnName("RestaurantID");
 
                 entity.Property(e => e.ReviewerName)
                     .IsRequired()
@@ -41,7 +49,8 @@ namespace RestaurantReviews.DataAccess.Model
 
                 entity.HasOne(d => d.Restaurant)
                     .WithMany(p => p.Review)
-                    .HasForeignKey(d => d.RestaurantId);
+                    .HasForeignKey(d => d.RestaurantId)
+                    .HasConstraintName("FK_Review_Restaurant");
             });
 
             OnModelCreatingPartial(modelBuilder);
