@@ -1,7 +1,19 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+  ViewData["Title"] = "Home Page";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome @(ViewData["currentUser"] ?? "2006 batch")</h1>
+  <h1 class="display-4">Welcome @(ViewData["currentUser"] ?? "2006 batch")</h1>
+</div>
+
+@{
+  string configs = "";
+  var config = (Microsoft.Extensions.Configuration.IConfigurationRoot)ViewData["ConfigRoot"];
+  foreach (var provider in config.Providers)
+  {
+    configs += provider.ToString() + "\n";
+  }
+}
+<div>
+  @configs
 </div>

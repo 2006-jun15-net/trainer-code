@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using RestaurantReviews.Domain.Model;
 using RestaurantReviews.WebUI.ViewModels;
@@ -9,11 +10,20 @@ namespace RestaurantReviews.WebUI.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        private readonly IConfigurationRoot _configRoot;
+
+        public HomeController(IConfiguration configRoot)
+        {
+            _configRoot = (IConfigurationRoot)configRoot;
+        }
+
+        public IActionResult Index(IConfiguration configuration)
         {
             TempData["currentUser"] = "Nick";
             ViewBag.currentUser = "Not Nick";
             //TempData["data"] = new List<Restaurant> { new Restaurant { Id = 1 } };
+            
+
 
             return View();
         }

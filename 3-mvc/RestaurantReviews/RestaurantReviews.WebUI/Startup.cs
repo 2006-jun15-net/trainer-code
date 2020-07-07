@@ -21,6 +21,8 @@ namespace RestaurantReviews.WebUI
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton(Configuration);
+
             services.AddDbContext<RestaurantReviewsDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("RestaurantReviewsDb")));
 
