@@ -47,8 +47,15 @@ namespace RestaurantReviews.WebUI
 
             app.UseAuthorization();
 
+            // "convention-based routing"
+            // "global routing"
             app.UseEndpoints(endpoints =>
             {
+                //endpoints.MapControllerRoute(
+                //    name: "order",
+                //    pattern: "place-order/{action=Index}/{id?}",
+                //    defaults: new { controller = "Order" });
+
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");

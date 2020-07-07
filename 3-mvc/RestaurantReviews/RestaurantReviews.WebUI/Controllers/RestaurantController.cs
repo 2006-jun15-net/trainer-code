@@ -27,6 +27,8 @@ namespace RestaurantReviews.WebUI.Controllers
         // e.g. Restaurant/Index/?search=Fred
         public ActionResult Index([FromQuery]string search = "")
         {
+            ViewData["currentUser"] = "Nick";
+
             IEnumerable<Restaurant> restaurants = Repo.GetRestaurants(search);
             IEnumerable<RestaurantViewModel> viewModels = restaurants.Select(x => new RestaurantViewModel
             {
@@ -89,6 +91,13 @@ namespace RestaurantReviews.WebUI.Controllers
                 return View(viewModel);
             }
         }
+
+        //// helper method
+        //[NonAction]
+        //public int asdf()
+        //{
+
+        //}
 
         // GET: Restaurant/Edit/5
         public ActionResult Edit(int id)
