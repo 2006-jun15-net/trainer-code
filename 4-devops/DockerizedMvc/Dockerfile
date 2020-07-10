@@ -15,7 +15,7 @@
 #     (the folder which will be visible to the image building process)
 #     (commonly, we type ".", current directory.)
 # -f: location of the Dockerfile to use
-#     (default to ./Dockerfile)
+#     (default to (build-context)/Dockerfile)
 # -t: tag the image so we can reference it with some name besides a long hash
 
 # you can have images stored locally
