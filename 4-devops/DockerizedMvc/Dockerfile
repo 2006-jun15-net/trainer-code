@@ -26,3 +26,14 @@
 #        registry         repository      tag
 #            v                  v          v
 FROM mcr.microsoft.com/dotnet/core/aspnet:3.1
+WORKDIR /app
+# copy "./publish" from the build context (project folder) to "/app/publish" inside the image filesystem
+# COPY publish publish
+COPY publish ./
+
+# this would run during the building of the image (bad)
+# RUN dotnet DockerizedMvc.dll
+
+# CMD and ENTRYPOINT are ways to not run things, but set metadeta on the image -
+# specifically, what command to use to start a container from the image.
+CMD dotnet DockerizedMvc.dll
