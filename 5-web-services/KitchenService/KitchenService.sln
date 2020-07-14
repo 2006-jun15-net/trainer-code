@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30225.117
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KitchenService", "KitchenService.csproj", "{9170263B-5604-41AA-B503-CC788AC14E26}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9170263B-5604-41AA-B503-CC788AC14E26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9170263B-5604-41AA-B503-CC788AC14E26}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9170263B-5604-41AA-B503-CC788AC14E26}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9170263B-5604-41AA-B503-CC788AC14E26}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B384AE12-4C2C-4163-90A2-6DCF0E4433A5}
+	EndGlobalSection
+EndGlobal
