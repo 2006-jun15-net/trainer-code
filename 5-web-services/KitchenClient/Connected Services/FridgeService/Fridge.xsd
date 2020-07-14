@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import schemaLocation="http://localhost:59551/Fridge.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/KitchenService.Models" />
-  <xs:element name="GetAllItems">
+  <xs:element name="GetAllContents">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>
   </xs:element>
-  <xs:element name="GetAllItemsResponse">
+  <xs:element name="GetAllContentsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/KitchenService.Models" minOccurs="0" name="GetAllItemsResult" nillable="true" type="q1:ArrayOfFoodItem" />
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/KitchenService.Models" minOccurs="0" name="GetAllContentsResult" nillable="true" type="q1:ArrayOfFoodItem" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

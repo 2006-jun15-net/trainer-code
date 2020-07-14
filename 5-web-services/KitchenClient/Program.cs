@@ -26,7 +26,7 @@ namespace KitchenClient
                     switch (input)
                     {
                         case '1':
-                            FoodItem[] items = client.GetAllItems();
+                            FoodItem[] items = client.GetAllContents();
 
                             foreach (var item in items)
                             {

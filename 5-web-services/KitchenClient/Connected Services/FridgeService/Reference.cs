@@ -94,11 +94,11 @@ namespace KitchenClient.FridgeService {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="FridgeService.IFridge")]
     public interface IFridge {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFridge/GetAllItems", ReplyAction="http://tempuri.org/IFridge/GetAllItemsResponse")]
-        KitchenClient.FridgeService.FoodItem[] GetAllItems();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFridge/GetAllContents", ReplyAction="http://tempuri.org/IFridge/GetAllContentsResponse")]
+        KitchenClient.FridgeService.FoodItem[] GetAllContents();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFridge/GetAllItems", ReplyAction="http://tempuri.org/IFridge/GetAllItemsResponse")]
-        System.Threading.Tasks.Task<KitchenClient.FridgeService.FoodItem[]> GetAllItemsAsync();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFridge/GetAllContents", ReplyAction="http://tempuri.org/IFridge/GetAllContentsResponse")]
+        System.Threading.Tasks.Task<KitchenClient.FridgeService.FoodItem[]> GetAllContentsAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IFridge/Clean", ReplyAction="http://tempuri.org/IFridge/CleanResponse")]
         KitchenClient.FridgeService.FoodItem[] Clean();
@@ -134,12 +134,12 @@ namespace KitchenClient.FridgeService {
                 base(binding, remoteAddress) {
         }
         
-        public KitchenClient.FridgeService.FoodItem[] GetAllItems() {
-            return base.Channel.GetAllItems();
+        public KitchenClient.FridgeService.FoodItem[] GetAllContents() {
+            return base.Channel.GetAllContents();
         }
         
-        public System.Threading.Tasks.Task<KitchenClient.FridgeService.FoodItem[]> GetAllItemsAsync() {
-            return base.Channel.GetAllItemsAsync();
+        public System.Threading.Tasks.Task<KitchenClient.FridgeService.FoodItem[]> GetAllContentsAsync() {
+            return base.Channel.GetAllContentsAsync();
         }
         
         public KitchenClient.FridgeService.FoodItem[] Clean() {

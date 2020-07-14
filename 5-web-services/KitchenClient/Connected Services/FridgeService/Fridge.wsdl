@@ -7,11 +7,11 @@
       <xsd:import schemaLocation="http://localhost:59551/Fridge.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/KitchenService.Models" />
     </xsd:schema>
   </wsdl:types>
-  <wsdl:message name="IFridge_GetAllItems_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetAllItems" />
+  <wsdl:message name="IFridge_GetAllContents_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllContents" />
   </wsdl:message>
-  <wsdl:message name="IFridge_GetAllItems_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetAllItemsResponse" />
+  <wsdl:message name="IFridge_GetAllContents_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllContentsResponse" />
   </wsdl:message>
   <wsdl:message name="IFridge_Clean_InputMessage">
     <wsdl:part name="parameters" element="tns:Clean" />
@@ -20,9 +20,9 @@
     <wsdl:part name="parameters" element="tns:CleanResponse" />
   </wsdl:message>
   <wsdl:portType name="IFridge">
-    <wsdl:operation name="GetAllItems">
-      <wsdl:input wsaw:Action="http://tempuri.org/IFridge/GetAllItems" message="tns:IFridge_GetAllItems_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IFridge/GetAllItemsResponse" message="tns:IFridge_GetAllItems_OutputMessage" />
+    <wsdl:operation name="GetAllContents">
+      <wsdl:input wsaw:Action="http://tempuri.org/IFridge/GetAllContents" message="tns:IFridge_GetAllContents_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IFridge/GetAllContentsResponse" message="tns:IFridge_GetAllContents_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="Clean">
       <wsdl:input wsaw:Action="http://tempuri.org/IFridge/Clean" message="tns:IFridge_Clean_InputMessage" />
@@ -31,8 +31,8 @@
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IFridge" type="tns:IFridge">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <wsdl:operation name="GetAllItems">
-      <soap:operation soapAction="http://tempuri.org/IFridge/GetAllItems" style="document" />
+    <wsdl:operation name="GetAllContents">
+      <soap:operation soapAction="http://tempuri.org/IFridge/GetAllContents" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
