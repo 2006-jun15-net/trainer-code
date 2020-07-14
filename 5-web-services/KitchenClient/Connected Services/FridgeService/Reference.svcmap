@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="9568463a-ef0a-4034-a9cc-3b9f8a17d7a3" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:59551/Fridge.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="Fridge.xsd" MetadataType="Schema" ID="e58a1ff9-28b4-4631-8290-59ca427eff8b" SourceId="1" SourceUrl="http://localhost:59551/Fridge.svc?xsd=xsd0" />
+    <MetadataFile FileName="Fridge.disco" MetadataType="Disco" ID="11d0f872-155f-4228-bdc2-ee7a96671160" SourceId="1" SourceUrl="http://localhost:59551/Fridge.svc?disco" />
+    <MetadataFile FileName="Fridge1.xsd" MetadataType="Schema" ID="a53ca7ba-9b5c-4cbc-bb7f-f2d1a48a066e" SourceId="1" SourceUrl="http://localhost:59551/Fridge.svc?xsd=xsd1" />
+    <MetadataFile FileName="Fridge.wsdl" MetadataType="Wsdl" ID="92ec9a65-53f5-4062-b800-77e0b541aa9d" SourceId="1" SourceUrl="http://localhost:59551/Fridge.svc?wsdl" />
+    <MetadataFile FileName="Fridge2.xsd" MetadataType="Schema" ID="341f5ac6-ad79-4998-a439-200d48ed1089" SourceId="1" SourceUrl="http://localhost:59551/Fridge.svc?xsd=xsd2" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>
