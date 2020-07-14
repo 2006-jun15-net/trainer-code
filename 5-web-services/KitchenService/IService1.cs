@@ -14,6 +14,7 @@ namespace KitchenService
     // based on various attributes in System.ServiceModel.
     // ServiceContractAttribute: mark an interface as a service, which contains operations
     // OperationContractAttribute: mark one method in a service interface as a reachable operation through the WSDL
+    // FaultContractAttribute: configure SOAP fault behavior
     // in System.Runtime.Serialization:
     // DataContractAttribute: mark a user-defined type as a type that will be part of some operation's parameters/return.
     // DataMemberAttribute: opt-in a member of a datacontract class to serialization.
