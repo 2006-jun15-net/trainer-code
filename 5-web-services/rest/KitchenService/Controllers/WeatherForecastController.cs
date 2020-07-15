@@ -8,7 +8,7 @@ using Microsoft.Extensions.Logging;
 namespace KitchenService.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("[controller]")] // equivalent to [Route("weatherforecast")] except you can copy paste it to other controllers
     public class WeatherForecastController : ControllerBase
     {
         private static readonly string[] Summaries = new[]
@@ -23,6 +23,7 @@ namespace KitchenService.Controllers
             _logger = logger;
         }
 
+        // GET /weatherforecast
         [HttpGet]
         public IEnumerable<WeatherForecast> Get()
         {
@@ -34,6 +35,21 @@ namespace KitchenService.Controllers
                 Summary = Summaries[rng.Next(Summaries.Length)]
             })
             .ToArray();
+        }
+
+        [HttpPost]
+        public void Post(WeatherForecast forecast)
+        {
+        }
+
+        [HttpPut]
+        public void Put(WeatherForecast forecast)
+        {
+        }
+
+        [HttpDelete]
+        public void Delete()
+        {
         }
     }
 }
