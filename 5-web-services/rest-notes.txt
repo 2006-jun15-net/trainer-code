@@ -76,9 +76,9 @@ other methods:
 most important: get should be safe, post (and others) we can do changes.
 
 status codes
-    100 informational - this request-response is still ongoing
+    1xx informational - this request-response is still ongoing
         100 continue: you sent the headers, ok, now send the body
-    200 successful
+    2xx successful
 *       200 ok: successful request
             for get
             in asp.net core: Ok(...)
@@ -90,7 +90,7 @@ status codes
 *       204 no content: success but we are not returning anything
             for put and delete
             NoContent()
-    300 redirection
+    3xx redirection
         301 moved permanently: resource isn't here
             should also include Location header saying where it's at.
 *       302 found: resource isn't here, browser usually automatically requests new URL with GET
@@ -98,7 +98,7 @@ status codes
             should also include Location header saying where it's at.
             RedirectToAction(...), RedirectToRoute(...)
         304 not modified: you had e.g. "if-modified-since" header, and the resource hasn't been modified
-    400 client error
+    4xx client error
 *       400 bad request. syntax of request is invalid.
             BadRequest()
 *       401 unauthorized: really means unauthenticated. you did not identify yourself.
@@ -115,7 +115,7 @@ status codes
         409 conflict: you can't do that because it's inconsistent with something else
 *       415 unsupported media type
         418 i'm a teapot: you asked me to brew coffee
-    500 server error
+    5xx server error
 *       500 internalservererror
             StatusCode(500)
         501 not implemented - usually we will implement it in future. like notimplementedexception
