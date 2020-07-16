@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 using KitchenService.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -22,25 +25,34 @@ namespace KitchenService.Controllers
 
         // GET: api/fridge/items
         [HttpGet("items")]
-        public IEnumerable<FoodItem> GetItems()
+        //[HttpGet("items.{format}")] // not proper REST / HTTP, the URL identifies the resource, NOT the representation
+        // use headers to distinguish representation.
+        //[Produces("application/xml")]
+        //[FormatFilter]
+        public IActionResult GetItems()
         {
-            return s_contents;
+            return Ok(s_contents);
         }
 
         // GET api/fridge/items/5
         [HttpGet("items/{id}", Name = "itembyid")]
         //[HttpGet("fooditems/{id}", Name = "fooditembyid")]
-        public IActionResult GetItem(int id)
+        public ActionResult<FoodItem> GetItem(int id)
         {
             if (s_contents.FirstOrDefault(x => x.Id == id) is FoodItem item)
             {
-                return Ok(item);
+                return item;
             }
+            //return StatusCode(418, new object());
             return NotFound();
+            //return Content("<!doctype html><p>data</p>", "application/html", Encoding.UTF8);
         }
 
         // POST api/fridge/items
         [HttpPost("items")]
+        [Consumes("application/json")] // disallow XML for the POST request
+        [ProducesResponseType(StatusCodes.Status409Conflict)]
+        [ProducesResponseType(typeof(FoodItem), StatusCodes.Status201Created)]
         public IActionResult PostItem([FromBody] FoodItem item)
         {
             if (s_contents.Any(x => x.Id == item.Id))
