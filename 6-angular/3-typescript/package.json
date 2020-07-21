@@ -1,0 +1,19 @@
+{
+  "name": "video-watcher",
+  "version": "1.0.0",
+  "description": "video watcher",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/2006-jun15-net/trainer-code.git"
+  },
+  "main": "index.js",
+  "scripts": {
+    "build": "rm -r out/* && cp src/*.html out && tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Nick Escalona",
+  "license": "ISC",
+  "dependencies": {
+    "typescript": "^3.9.7"
+  }
+}
