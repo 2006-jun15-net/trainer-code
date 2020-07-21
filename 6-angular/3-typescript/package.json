@@ -8,12 +8,16 @@
   },
   "main": "index.js",
   "scripts": {
-    "build": "rm -r out/* && cp src/*.html out && tsc",
+    "build": "rm -rf out dist && tsc && webpack && cp src/*.html dist",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Nick Escalona",
   "license": "ISC",
   "dependencies": {
-    "typescript": "^3.9.7"
+  },
+  "devDependencies": {
+    "typescript": "^3.9.7",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.12"
   }
 }
