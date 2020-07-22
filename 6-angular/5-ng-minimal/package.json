@@ -1,0 +1,26 @@
+{
+  "name": "ng-minimal",
+  "version": "1.0.0",
+  "description": "minimal ng app for deck of cards api",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/2006-jun15-net/trainer-code.git"
+  },
+  "license": "ISC",
+  "scripts": {},
+  "author": "",
+  "dependencies": {
+    "@angular/common": "~9.1.1",
+    "@angular/core": "~9.1.1",
+    "@angular/compiler": "~9.1.1",
+    "@angular/platform-browser": "~9.1.1",
+    "@angular/platform-browser-dynamic": "~9.1.1",
+    "zone.js": "~0.10.3"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "~0.901.1",
+    "@angular/compiler-cli": "~9.1.1",
+    "@angular/cli": "~9.1.1",
+    "typescript": "^3.8.3"
+  }
+}
