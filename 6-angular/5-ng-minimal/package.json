@@ -8,6 +8,7 @@
   },
   "license": "ISC",
   "scripts": {},
+  "private": true,
   "author": "",
   "dependencies": {
     "@angular/common": "~9.1.1",
