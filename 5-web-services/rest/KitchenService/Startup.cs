@@ -26,6 +26,19 @@ namespace KitchenService
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                // defining the policy
+                options.AddPolicy(name: "AllowLocalNgServe",
+                                  builder =>
+                                  {
+                                      builder.WithOrigins("http://localhost:4200")
+                                        .AllowAnyMethod()
+                                        .AllowAnyHeader()
+                                        .AllowCredentials();
+                                  });
+            });
+
             services.AddControllers(options =>
             {
                 options.ReturnHttpNotAcceptable = true;
@@ -67,6 +80,9 @@ namespace KitchenService
             });
 
             app.UseRouting();
+
+            // apply CORS policy globally (as opposed to per-controller, per-action with EnableCorsAttribute)
+            app.UseCors("AllowLocalNgServe");
 
             app.UseAuthorization();
 
