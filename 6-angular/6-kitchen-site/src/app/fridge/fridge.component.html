@@ -1,0 +1,24 @@
+<div>(fridge)</div>
+
+<!-- in the template, every public member of the component class
+     is accessible (without "this") -->
+
+<button (click)="reloadFridgeItems()">Reload</button>
+
+<div *ngIf="error">
+  error: {{ error }}
+</div>
+<div *ngIf="!fridgeItems && !error">
+  (loading...)
+</div>
+<div *ngIf="fridgeItems && !error">
+  <div *ngIf="fridgeItems.length === 0">
+    (empty)
+  </div>
+  <ul *ngIf="fridgeItems.length > 0">
+    <!-- ngFor structural directive has a special syntax of its own -->
+    <li *ngFor="let item of fridgeItems">
+      {{ item.name }}
+    </li>
+  </ul>
+</div>
