@@ -22,12 +22,12 @@ src/
 
 .editorconfig                   common standard file for configuring text formatting
 angular.json                    configures how all the "ng" commands behave
-browserslist                    standard way to specify what browsers a JS compilation
+.browserslistrc                 standard way to specify what browsers a JS compilation
                                     needs to be compatible
 karma.conf.js                   configure Karma (unit test runner application)
 package-lock.json               NPM "lock file" - precise repeatable manifest of installed
                                     packages and their versions
 package.json                    NPM list of required packages and compatible version ranges
 tsconfig*.json                  configuration for typescript compiling
-tslist.json                     configures "lint" rules - good style/practices for TS.
+tslint.json                     configures "lint" rules - good style/practices for TS.
                                     (checked with "ng lint")
