@@ -27,11 +27,11 @@ import FoodItem from './models/food-item';
 export class KitchenApiService {
   private baseUrl = 'https://localhost:44350';
 
-  constructor(private httpClient: HttpClient) {
-  }
+  constructor(private httpClient: HttpClient) {}
 
-  getFridgeItems() {
-    return this.httpClient.get<FoodItem[]>(`${this.baseUrl}/api/fridge/items`)
+  getFridgeItems(): Promise<FoodItem[]> {
+    return this.httpClient
+      .get<FoodItem[]>(`${this.baseUrl}/api/fridge/items`)
       .toPromise();
   }
 }

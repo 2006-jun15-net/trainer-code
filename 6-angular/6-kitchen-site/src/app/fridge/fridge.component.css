@@ -1,0 +1,3 @@
+/* we don't need to worry about this
+file ever conflicting with other component's css; it's preprocessed
+so it can only apply to anything in this component. */
