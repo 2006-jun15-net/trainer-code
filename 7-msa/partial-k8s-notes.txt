@@ -1,0 +1,25 @@
+k8s
+    cluster
+        a set of machines (nodes) that kubernetes runs containers on.
+    node
+        a machine in a cluster (a VM or a physical server)
+    namespace
+        clusters can be divided into different namespaces if needed.
+        usually we stick to the default one.
+    cluster master
+        every cluster needs at least one master node.
+        the master nodes manage the other (worker) nodes.
+        with kubectl, we tell the master what to do, and it tells the workers what to do.
+    pod
+        a pod is the building block of kubernetes. an abstraction over one container.
+        technically it could contain several containers but usually just one.
+        pods can be given resource limits - how much CPU/memory they need,
+        how much they are allowed to request at max.
+        goes through states: pending, running; succeeded, failed.
+    deployment
+        an abstraction over pods. rather than managing each pod by hand,
+        we define a desired amount of pods (replicas), and let k8s make them for us
+        and distribute them automatically across the nodes. each replica (pod) will
+        be an instance of the same image.
+        deployments can be updated and rolled back without having to turn everything
+        off and on again.
