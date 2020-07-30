@@ -1,0 +1,31 @@
+az group create -l southcentralus -n 2006-training-aks-rg
+az aks create -g 2006-training-aks-rg -n aks1 -c 1 -s Standard_B2S --generate-ssh-keys
+az aks get-credentials -g 2006-training-aks-rg -n aks1
+kubectl config get-contexts
+code ~/.kube/config
+kubectl get node
+kubectl config use-context docker-desktop
+kubectl get node
+kubectl config use-context aks1
+kubectl get node
+git clone https://github.com/Azure-Samples/azure-voting-app-redis
+code azure-voting-app-redis/
+kubectl config use-context aks1
+kubectl apply -f azure-vote-all-in-one-redis.yaml
+kubectl get all
+kubectl get service azure-vote-front --watch
+kubectl delete -f azure-vote-all-in-one-redis.yaml
+code -r ../nick-project2-kitchen-api
+kubectl apply -f k8s
+kubectl get service
+kubectl get deployments
+kubectl get pods
+kubectl get node
+az aks scale -g 2006-training-aks-rg -n aks1 -c 2
+kubectl apply -f k8s
+kubectl get service
+kubectl get pods -o wide
+docker-compose build
+docker-compose push
+kubectl rollout restart -f k8s
+kubectl logs -l app=kitchen
