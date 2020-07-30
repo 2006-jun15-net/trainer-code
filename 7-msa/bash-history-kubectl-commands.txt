@@ -1,0 +1,14 @@
+kubectl run kitchen-db --image=mcr.microsoft.com/mssql/server:2019-latest --env="ACCEPT_EULA=Y" --env="SA_PASSWORD=Pass@word"
+kubectl get pod
+kubectl describe pod kitchen-db
+kubectl expose pod kitchen-db --port=1433 --name=kitchen-db-svc
+kubectl get service
+kubectl run kitchen-api --image=proj2api:1.0 --env="ConnectionStrings__AzureSql=Server=tcp:10.100.220.166,1433;Initial Catalog=Kitchen;User ID=sa;Password=Pass@word"
+kubectl get pod
+kubectl logs kitchen-api
+kubectl logs kitchen-db | grep Kitchen
+kubectl expose pod kitchen-api --port=80 --name=kitchen-api-svc --type=NodePort
+kubectl get service
+kubectl run kitchen-ui --image=proj2ui:1.0
+kubectl expose pod kitchen-ui --port=80 --name=kitchen-ui-svc --type=NodePort
+kubectl get service
