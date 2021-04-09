@@ -26,6 +26,10 @@ namespace HelloWorldWebApp
         {
             // teach asp.net about controllers and views
             services.AddControllersWithViews();
+
+            // set up DI in this method
+            // define services here
+            // other stuff (in the middleware somewhere) will request those services
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -44,35 +48,35 @@ namespace HelloWorldWebApp
 
             app.UseEndpoints(endpoints =>
             {
-                // C# supports anonymous types like new { prop = "a", prop2 = 1 }
-                // we can set up multiple routes - each one will give a rule for a certain pattern of URL
-                // that can decide what the controller and action are.
-                endpoints.MapControllerRoute("hello-route", "hello", new { controller = "Hello", action = "Hello1" });
-                // for each request, it starts with the first route and if that doesn't match, it tries each succeeding one
-                // in order
-                // if you pull the controller or action directly from the pattern, you don't need any default for it
-                endpoints.MapControllerRoute("default", "{controller}/{action}");
+                 // C# supports anonymous types like new { prop = "a", prop2 = 1 }
+                 // we can set up multiple routes - each one will give a rule for a certain pattern of URL
+                 // that can decide what the controller and action are.
+                 endpoints.MapControllerRoute("hello-route", "hello", new { controller = "Hello", action = "Hello1" });
+                 // for each request, it starts with the first route and if that doesn't match, it tries each succeeding one
+                 // in order
+                 // if you pull the controller or action directly from the pattern, you don't need any default for it
+                 endpoints.MapControllerRoute("default", "{controller}/{action}");
             });
 
-            //app.UseEndpoints(endpoints =>
-            //{
+            // app.UseEndpoints(endpoints =>
+            // {
             //    endpoints.MapGet("/", async context =>
             //    {
             //        await context.Response.WriteAsync("Hello World!");
             //    });
-            //});
+            // });
 
             // for every request, just respond with hello world html
-            //app.Run(async context =>
-            //{
+            // app.Run(async context =>
+            // {
             //    context.Response.StatusCode = 200; // success
             //    context.Response.ContentType = "text/html";
             //    await context.Response.WriteAsync("<!DOCTYPE html><html><head></head><body>Hello world</body></html>");
-            //});
+            // });
 
             // for every request, look in the url for a relative path, and respond
             // with the contents of that file.
-            app.Run(async context =>
+            app.Use(async (context, next) =>
             {
                 string path = $"wwwroot{context.Request.Path}";
 
@@ -83,22 +87,26 @@ namespace HelloWorldWebApp
                     context.Response.StatusCode = 200; // success
                     context.Response.ContentType = "text/html";
                     await context.Response.WriteAsync(text);
+
+                    // short circuit middleware pipeline
                 }
                 catch (Exception ex)
                 {
-                    context.Response.StatusCode = 500; // error
+                    // let the next middleware (whatever it may be) finish handling this request.
+                    await next();
                 }
+            });
 
-
-
-//                await context.Response.WriteAsync(@$" <!DOCTYPE html>
-//<html>
-//    <head>
-//    </head>
-//    <body>
-//        Path: {context.Request.Path}
-//    </body>
-//</html>");
+            app.Use(async (context, next) =>
+            {
+                await context.Response.WriteAsync(@$"<!DOCTYPE html>
+<html>
+   <head>
+   </head>
+   <body>
+       Path: {context.Request.Path}
+   </body>
+</html>");
             });
         }
     }
